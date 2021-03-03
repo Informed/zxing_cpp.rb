@@ -1,5 +1,4 @@
 .gitignore
-.gitmodules
 CHANGELOG.rdoc
 Gemfile
 Manifest.txt
