@@ -20,8 +20,7 @@ lib = File.expand_path "#{ZXING_CPP_BUILD}/libzxing.a"
 $CPPFLAGS = %(-I#{cpp_include})
 $DLDFLAGS = %(-lstdc++ #{lib})
 
-if Dir["/usr/lib/libiconv.*"].size > 0
-  $DLDFLAGS << %( -liconv)
-end
+POSSIBLE_DIRS = ['/usr/lib/libiconv.*', '/usr/local/Cellar/libiconv/1.16/lib/libiconv.*'].freeze
+$DLDFLAGS << %( -liconv) if POSSIBLE_DIRS.any? { |dir| !Dir[dir].empty? }
 
 create_makefile 'zxing/zxing'
